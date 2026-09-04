@@ -16,33 +16,71 @@ const poppins = Poppins({
   variable: '--font-poppins',
 });
 
-export const metadata: Metadata = {
-  title: {
-    template: '%s | AGZAMOV LEGAL GROUP',
-    default: 'AGZAMOV LEGAL GROUP — Professional Yuridik Xizmatlar va Advokatura',
-  },
-  description:
-    'Toshkentda yuqori toifali advokatlar va yuridik konsalting. Korporativ huquq, iqtisodiy sudlar, jinoiy himoya va soliq nizolari bo‘yicha ishonchli yechimlar.',
-  keywords: [
-    'advokat Toshkent',
-    'yurist Toshkent',
-    'yuridik xizmatlar',
-    'korporativ huquq',
-    'iqtisodiy sud',
-    'jinoiy himoya',
-    'Agzamov Legal Group',
-  ],
-  icons: {
-    icon: [
-      { url: '/icon.png', type: 'image/png' },
-      { url: '/favicon.ico' },
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  const titles: Record<string, string> = {
+    ru: 'AGZAMOV LEGAL GROUP — Профессиональные юридические услуги и адвокатура в Ташкенте',
+    uz: 'AGZAMOV LEGAL GROUP — Professional Yuridik Xizmatlar va Advokatura',
+    en: 'AGZAMOV LEGAL GROUP — Professional Legal Services & Advocacy in Tashkent',
+  };
+
+  const descriptions: Record<string, string> = {
+    ru: 'Высококвалифицированные адвокаты и юридический консалтинг в Ташкенте. Корпоративное право, экономические суды, уголовная защита и налоговые споры.',
+    uz: 'Toshkentda yuqori toifali advokatlar va yuridik konsalting. Korporativ huquq, iqtisodiy sudlar, jinoiy himoya va soliq nizolari bo‘yicha ishonchli yechimlar.',
+    en: 'High-class attorneys and legal consulting in Tashkent. Corporate law, economic courts, criminal defense, and tax disputes.',
+  };
+
+  const keywords: Record<string, string[]> = {
+    ru: [
+      'адвокат Ташкент',
+      'юрист Ташкент',
+      'юридические услуги',
+      'корпоративное право',
+      'экономический суд',
+      'уголовная защита',
+      'Agzamov Legal Group',
     ],
-    apple: [
-      { url: '/apple-icon.png' },
+    uz: [
+      'advokat Toshkent',
+      'yurist Toshkent',
+      'yuridik xizmatlar',
+      'korporativ huquq',
+      'iqtisodiy sud',
+      'jinoiy himoya',
+      'Agzamov Legal Group',
     ],
-    shortcut: '/favicon.ico',
-  },
-};
+    en: [
+      'lawyer Tashkent',
+      'attorney Tashkent',
+      'legal services Uzbekistan',
+      'corporate law',
+      'commercial disputes',
+      'Agzamov Legal Group',
+    ],
+  };
+
+  return {
+    title: {
+      template: '%s | AGZAMOV LEGAL GROUP',
+      default: titles[locale] || titles.ru,
+    },
+    description: descriptions[locale] || descriptions.ru,
+    keywords: keywords[locale] || keywords.ru,
+    icons: {
+      icon: [
+        { url: '/icon.png', type: 'image/png' },
+        { url: '/favicon.ico' },
+      ],
+      apple: [{ url: '/apple-icon.png' }],
+      shortcut: '/favicon.ico',
+    },
+  };
+}
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
