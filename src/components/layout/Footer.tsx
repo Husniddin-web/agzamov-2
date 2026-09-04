@@ -44,12 +44,9 @@ export const Footer: React.FC = () => {
 
             {/* 24/7 Emergency Hotline - Senior Level Minimalist Editorial */}
             <div className="pt-2 border-l-2 border-red-700/70 pl-4 space-y-1">
-              <div className="flex items-center gap-2">
-                <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
-                <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-widest">
-                  24/7 Tezkor Advokat
-                </span>
-              </div>
+              <span className="text-[11px] font-bold text-zinc-400 uppercase tracking-widest block">
+                24/7 Tezkor Advokat
+              </span>
               <a
                 href={`tel:${siteConfig.emergencyPhoneClean}`}
                 className="text-lg font-black text-white hover:text-red-400 transition-colors tracking-wide block"
@@ -176,12 +173,9 @@ export const Footer: React.FC = () => {
 
         {/* Statutory Legal Notice / Litsenziya Guvohnomasi */}
         <div className="pt-8 pb-4 border-b border-zinc-900/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 text-xs text-zinc-400">
-          <div className="flex items-start sm:items-center gap-2.5">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0 mt-1 sm:mt-0" />
-            <p className="leading-relaxed">
-              {siteConfig.licenseNotice[locale]}
-            </p>
-          </div>
+          <p className="leading-relaxed">
+            {siteConfig.licenseNotice[locale]}
+          </p>
           <span className="shrink-0 px-2.5 py-1 rounded bg-white/[0.04] border border-white/10 text-[11px] font-mono uppercase tracking-wider text-zinc-300">
             Litsenziya № {siteConfig.licenseNumber}
           </span>

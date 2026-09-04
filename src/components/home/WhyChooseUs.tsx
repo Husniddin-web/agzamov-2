@@ -66,11 +66,9 @@ export const WhyChooseUs: React.FC = () => {
           >
             {/* Red Eyebrow Tag with Red Line */}
             <div>
-              <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider uppercase text-[#b91c1c]">
-                <span className="w-2 h-2 rounded-full bg-[#b91c1c] inline-block shadow-sm" />
-                <span>{t('tag')}</span>
-              </div>
-              <div className="w-9 h-0.5 bg-[#b91c1c] mt-2" />
+              <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-[#b91c1c]">
+                {t('tag')}
+              </p>
             </div>
 
             {/* Authoritative Headline (Matching Hero Typography) */}

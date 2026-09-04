@@ -161,11 +161,9 @@ export const FounderSection: React.FC = () => {
           {/* Right Column: Category Text, Dynamic Headline, Quote & Slider Controls */}
           <div className="lg:col-span-7 space-y-7 text-left" data-aos="fade-left" data-aos-duration="850">
             
-            {/* Category: Clean text with small red dot indicator */}
-            <div className="flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider uppercase text-red-600">
-              <span className="w-2.5 h-2.5 bg-red-600 rounded-sm inline-block shadow-sm shadow-red-600/50" />
-              <span>{categoryTitles[locale] || categoryTitles.uz}</span>
-            </div>
+            <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-red-600">
+              {categoryTitles[locale] || categoryTitles.uz}
+            </p>
 
             {/* Dynamic Headline */}
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-950 tracking-tight leading-tight min-h-[70px] transition-all duration-300">

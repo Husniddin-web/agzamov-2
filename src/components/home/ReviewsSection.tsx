@@ -102,10 +102,9 @@ export const ReviewsSection: React.FC = () => {
           data-aos-duration="800"
           className="flex justify-center mb-10"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-red-950/40 border border-red-600/30 text-red-400 text-xs font-semibold tracking-wider uppercase shadow-lg shadow-red-950/30">
-            <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-            <span>{sectionBadge[locale] || sectionBadge.uz}</span>
-          </div>
+          <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-red-500 text-center">
+            {sectionBadge[locale] || sectionBadge.uz}
+          </p>
         </div>
 
         {/* Large Central Testimonial Showcase (Not a box card, wide editorial format) */}

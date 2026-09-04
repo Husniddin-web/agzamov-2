@@ -109,7 +109,6 @@ export const Header: React.FC = () => {
                   }`}
                 >
                   <span>{tNav(item.key as any)}</span>
-                  {isActive && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
                 </Link>
               );
             })}

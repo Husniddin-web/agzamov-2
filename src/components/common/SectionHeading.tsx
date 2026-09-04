@@ -24,14 +24,13 @@ export const SectionHeading: React.FC<SectionHeadingProps> = ({
       } ${className}`}
     >
       {tag && (
-        <div
-          className={`flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider uppercase text-red-600 ${
-            centered ? 'justify-center' : 'justify-start'
+        <p
+          className={`text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-red-600 ${
+            centered ? 'text-center' : 'text-left'
           }`}
         >
-          <span className="w-2.5 h-2.5 bg-red-600 rounded-sm inline-block shadow-sm shadow-red-600/50" />
-          <span>{tag}</span>
-        </div>
+          {tag}
+        </p>
       )}
       <h2
         className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight ${

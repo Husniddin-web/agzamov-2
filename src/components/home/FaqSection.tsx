@@ -45,9 +45,8 @@ export const FaqSection: React.FC = () => {
                   className="w-full flex items-center justify-between p-6 sm:p-7 text-left gap-4 focus:outline-none cursor-pointer group"
                   aria-expanded={isOpen}
                 >
-                  <span className="flex items-center gap-3 text-base sm:text-lg font-bold text-zinc-950 group-hover:text-red-700 transition-colors">
-                    <span className="h-2 w-2 rounded-full bg-red-600 shrink-0" />
-                    <span>{faq.question[locale]}</span>
+                  <span className="text-base sm:text-lg font-bold text-zinc-950 group-hover:text-red-700 transition-colors">
+                    {faq.question[locale]}
                   </span>
 
                   <span

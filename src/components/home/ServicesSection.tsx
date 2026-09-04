@@ -78,10 +78,9 @@ export const ServicesSection: React.FC = () => {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8"
         >
           <div className="space-y-3 max-w-3xl text-left">
-            <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider uppercase text-red-500">
-              <span className="w-2 h-2 rounded-full bg-red-600 inline-block shadow-sm shadow-red-600/60" />
-              <span>{t('tag')}</span>
-            </div>
+            <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-red-500">
+              {t('tag')}
+            </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
               {t('title')}
             </h2>
@@ -187,7 +186,7 @@ export const ServicesSection: React.FC = () => {
               </p>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-white/[0.08] flex items-center justify-between">
+            <div className="pt-6 mt-6 border-t border-white/[0.08] flex items-center">
               <Link
                 href="/contact"
                 className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-red-400 group-hover:text-red-300 transition-colors"
@@ -195,8 +194,6 @@ export const ServicesSection: React.FC = () => {
                 <span>{bespokeContent.action[locale] || bespokeContent.action.uz}</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
               </Link>
-
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
             </div>
           </div>
         </div>
@@ -212,10 +209,9 @@ export const ServicesSection: React.FC = () => {
             data-aos-duration="800"
             className="text-left space-y-3 max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold tracking-wider uppercase text-red-500">
-              <span className="w-2 h-2 rounded-full bg-red-600 inline-block shadow-sm" />
-              <span>{t('principlesTag')}</span>
-            </div>
+            <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-red-500">
+              {t('principlesTag')}
+            </p>
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
               {t('principlesTitle')}
             </h3>
@@ -260,7 +256,6 @@ export const ServicesSection: React.FC = () => {
                   <span className="text-[10px] font-mono tracking-widest text-zinc-600 uppercase group-hover:text-zinc-500">
                     Standart 0{pIdx + 1}
                   </span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-600/50 group-hover:bg-red-500" />
                 </div>
               </div>
             ))}

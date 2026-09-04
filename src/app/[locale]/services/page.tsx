@@ -210,7 +210,6 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
                   <span className="text-[10px] font-mono tracking-widest text-zinc-600 uppercase">
                     Tamoyil 0{pIdx + 1}
                   </span>
-                  <span className="w-1.5 h-1.5 rounded-full bg-red-600/50 group-hover:bg-red-500" />
                 </div>
               </div>
             ))}

@@ -44,12 +44,9 @@ export const ConsultationCta: React.FC = () => {
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="flex items-center gap-2">
-                        <p className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">
-                          Telefon orqali bog&apos;lanish
-                        </p>
-                        <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                      </div>
+                      <p className="text-xs text-zinc-400 font-semibold uppercase tracking-wider">
+                        Telefon orqali bog&apos;lanish
+                      </p>
                       <p className="text-lg font-black text-white group-hover:text-red-400 transition-colors">
                         {siteConfig.phone}
                       </p>
