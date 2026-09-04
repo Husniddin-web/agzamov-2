@@ -52,7 +52,7 @@ export const Footer: React.FC = () => {
               </div>
               <a
                 href={`tel:${siteConfig.emergencyPhoneClean}`}
-                className="text-lg font-black text-white hover:text-red-400 transition-colors tracking-wide block font-mono"
+                className="text-lg font-black text-white hover:text-red-400 transition-colors tracking-wide block"
               >
                 {siteConfig.emergencyPhone}
               </a>

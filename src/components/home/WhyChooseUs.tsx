@@ -2,44 +2,19 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { Container } from '../common/Container';
 import { Link } from '@/i18n/routing';
-import { siteConfig } from '@/config/site';
-import { Locale } from '@/types';
 import {
   Shield,
   Zap,
   Scale,
   User,
   ArrowRight,
-  ShieldCheck,
-  CheckCircle2,
 } from 'lucide-react';
 
 export const WhyChooseUs: React.FC = () => {
   const t = useTranslations('whyUs');
-  const locale = useLocale() as Locale;
-
-  const badgeLabels: Record<Locale, { expTitle: string; expSub: string; license: string }> = {
-    uz: {
-      expTitle: `${siteConfig.stats.experienceYears}+ Yillik`,
-      expSub: 'Sud va Tergov Amaliyoti',
-      license: `Litsenziya № ${siteConfig.licenseNumber}`,
-    },
-    ru: {
-      expTitle: `${siteConfig.stats.experienceYears}+ Лет`,
-      expSub: 'Судебной и следственной практики',
-      license: `Лицензия № ${siteConfig.licenseNumber}`,
-    },
-    en: {
-      expTitle: `${siteConfig.stats.experienceYears}+ Years`,
-      expSub: 'Trial & Judicial Practice',
-      license: `License No. ${siteConfig.licenseNumber}`,
-    },
-  };
-
-  const currentBadge = badgeLabels[locale] || badgeLabels.uz;
 
   const featureCards = [
     {
@@ -127,15 +102,12 @@ export const WhyChooseUs: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: High-Res Law Consultation Photo with Floating Trust Badges */}
+          {/* Right Column: High-Res Law Consultation Photo with Organic Curved Cut */}
           <div
             data-aos="fade-left"
             data-aos-duration="850"
             className="lg:col-span-6 relative w-full flex justify-end group"
           >
-            {/* Ambient Background Warm Glow */}
-            <div className="absolute -inset-2 lg:-inset-6 bg-gradient-to-tr from-red-600/15 via-red-900/5 to-transparent blur-2xl -z-10 rounded-3xl opacity-60 group-hover:opacity-100 transition-opacity duration-700" />
-
             <div className="relative w-full h-[400px] sm:h-[480px] lg:h-[510px] max-w-2xl lg:max-w-none rounded-3xl lg:rounded-none overflow-hidden lg:overflow-visible">
               {/* Curved container on Desktop, sleek rounded frame on Mobile */}
               <div className="relative w-full h-full lg:[clip-path:url(#whyChooseOrganicCurve)] shadow-2xl lg:shadow-none rounded-2xl lg:rounded-none overflow-hidden">
@@ -148,35 +120,7 @@ export const WhyChooseUs: React.FC = () => {
                   priority
                 />
                 {/* Subtle natural gradient reflection */}
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/35 via-black/10 to-transparent pointer-events-none" />
-              </div>
-
-              {/* Floating Stat Card 1: Senior Practice Authority */}
-              <div className="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 z-20 p-3.5 sm:p-4 rounded-2xl bg-zinc-950/85 backdrop-blur-md border border-white/15 text-white shadow-2xl transition-all duration-500 group-hover:translate-y-[-4px] group-hover:border-red-500/40">
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-[#b91c1c] flex items-center justify-center text-white shrink-0 shadow-md shadow-red-900/40">
-                    <ShieldCheck className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg sm:text-xl font-black text-white font-mono leading-none">
-                        {currentBadge.expTitle}
-                      </span>
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    </div>
-                    <p className="text-[11px] text-zinc-300 font-medium mt-1 leading-none">
-                      {currentBadge.expSub}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating Stat Card 2: Official License Badge */}
-              <div className="hidden sm:inline-flex absolute top-4 right-4 sm:top-6 sm:right-6 z-20 px-3.5 py-1.5 rounded-full bg-white/90 backdrop-blur-md border border-zinc-200 text-zinc-900 shadow-xl items-center gap-2 transition-all duration-300 group-hover:scale-105 group-hover:bg-white">
-                <span className="w-2 h-2 rounded-full bg-[#b91c1c]" />
-                <span className="text-xs font-bold uppercase tracking-wider font-mono text-zinc-800">
-                  {currentBadge.license}
-                </span>
+                <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-transparent pointer-events-none" />
               </div>
             </div>
           </div>

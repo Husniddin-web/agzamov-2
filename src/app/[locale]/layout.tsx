@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Poppins } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages, setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -7,6 +8,13 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { AosProvider } from '@/components/common/AosProvider';
 import '../globals.css';
+
+const poppins = Poppins({
+  weight: ['300', '400', '500', '600', '700', '800'],
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+  variable: '--font-poppins',
+});
 
 export const metadata: Metadata = {
   title: {
@@ -59,8 +67,8 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className="dark scroll-smooth">
-      <body className="min-h-screen bg-black text-zinc-100 flex flex-col font-sans selection:bg-red-700 selection:text-white antialiased">
+    <html lang={locale} className={`${poppins.variable} dark scroll-smooth`}>
+      <body className={`${poppins.className} min-h-screen bg-black text-zinc-100 flex flex-col font-sans selection:bg-red-700 selection:text-white antialiased`}>
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AosProvider>
             <Header />

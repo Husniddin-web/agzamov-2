@@ -40,16 +40,13 @@ export const HeroSection: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-8 xl:col-span-7 text-left space-y-5 sm:space-y-6">
             
-            {/* Top Eyebrow Tag: Clean Monospace Tracked Typography with License Badge */}
+            {/* Top Eyebrow Tag: Clean Pure Poppins Tracked Typography */}
             <div
               data-aos="fade-up"
               data-aos-duration="800"
-              className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white/[0.04] border border-white/10 text-xs sm:text-[12px] tracking-[0.2em] text-zinc-300 font-medium uppercase font-mono"
+              className="text-xs sm:text-[13px] tracking-[0.22em] text-zinc-400 font-semibold uppercase"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
-              <span>{t('eyebrow')}</span>
-              <span className="text-zinc-600">|</span>
-              <span className="text-zinc-400">№ {siteConfig.licenseNumber} • EST. {siteConfig.foundedYear}</span>
+              {t('eyebrow')}
             </div>
 
             {/* Main Headline: Pure Authoritative Typography */}

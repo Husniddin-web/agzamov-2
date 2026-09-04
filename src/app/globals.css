@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "aos/dist/aos.css";
 
+@theme {
+  --font-sans: var(--font-poppins), 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
 @layer base {
   :root {
     --background: #ffffff;
@@ -17,7 +21,7 @@
   body {
     background-color: #ffffff;
     color: #18181b;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-poppins), 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     overflow-x: hidden;
     selection-background-color: #c22619;
     selection-color: #ffffff;
