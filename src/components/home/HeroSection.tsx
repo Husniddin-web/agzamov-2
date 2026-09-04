@@ -17,7 +17,7 @@ export const HeroSection: React.FC = () => {
       <div className="absolute inset-0 z-0">
         <Image
           src="/new-hero-bg.png"
-          alt="Agzamov Legal Group Supreme Court Hall"
+          alt="Agzamov Legal Group Law Chamber & Judicial Practice"
           fill
           priority
           className="object-cover object-center scale-100"
