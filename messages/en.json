@@ -1,0 +1,141 @@
+{
+  "common": {
+    "brandName": "AGZAMOV LEGAL GROUP",
+    "brandTagline": "Professional Legal Services & Advocacy",
+    "getConsultation": "Free Consultation",
+    "contactUs": "Contact Us",
+    "learnMore": "Learn More",
+    "readMore": "Read Full Story",
+    "viewAll": "View All",
+    "allServices": "All Services",
+    "allNews": "All Articles",
+    "ourTeam": "Our Team",
+    "phone": "+998 95 133 15 15",
+    "email": "info@agzamovlegal.uz",
+    "address": "107B Amir Temur Avenue, Mirabad District, Tashkent, Uzbekistan",
+    "workingHours": "Mon - Sat: 09:00 - 18:00"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "team": "Our Team",
+    "news": "News",
+    "contact": "Contact"
+  },
+  "hero": {
+    "eyebrow": "LEGAL PROTECTION FOR BUSINESS",
+    "badge": "AGZAMOV LEGAL GROUP",
+    "titlePrefix": "Law That Protects",
+    "titleHighlight": "Business Interests",
+    "subtitle": "Comprehensive corporate legal counsel and robust defense in complex commercial challenges.",
+    "primaryCta": "Get Consultation",
+    "secondaryCta": "Explore Services",
+    "emergencyText": "24/7 emergency legal assistance available"
+  },
+  "stats": {
+    "expLabel": "EXPERIENCE",
+    "experience": "years of practical expertise",
+    "casesLabel": "RESOLVED CASES",
+    "cases": "successfully resolved cases",
+    "partnersLabel": "CLIENT TRUST",
+    "partners": "retained corporate clients",
+    "winRateLabel": "SUCCESSFUL PROJECTS",
+    "winRate": "case success win rate",
+    "support": "Legal Support & Counsel"
+  },
+  "whyUs": {
+    "tag": "WHY CHOOSE US?",
+    "titleLine1": "When You Need",
+    "titleLine2": "It Most, Decisive",
+    "titlePrefix": "Uncompromising",
+    "titleHighlight": "Legal Defense",
+    "subtitle": "We don’t merely provide legal advice — we conduct exhaustive tactical analysis and formulate decisive solutions to protect your rights and enterprise value.",
+    "primaryCta": "Get Free Consultation",
+    "videoCta": "About Us (2:15)",
+    "card1Title": "20+ Years\nExperience",
+    "card1Desc": "Unrivaled expertise across prosecution, court judicial practice, and enterprise counsel.",
+    "card2Title": "Rapid 24/7\nResponse",
+    "card2Desc": "We deploy counsel within 30–45 minutes during sudden audits and emergencies.",
+    "card3Title": "100%\nConfidentiality",
+    "card3Desc": "Statutory attorney-client privilege protecting all corporate and private data.",
+    "card4Title": "Transparent\nPricing",
+    "card4Desc": "Fixed statutory engagements with zero unexpected hidden surcharges.",
+    "bannerTitle": "Trust.",
+    "bannerHighlight": "Results. Protection.",
+    "bannerSub": "Your rights remain our uncompromising priority.",
+    "stat1Num": "50+",
+    "stat1Text": "clients trust our counsel",
+    "stat2Num": "540+",
+    "stat2Text": "resolved proceedings",
+    "stat3Num": "98%",
+    "stat3Text": "client satisfaction rate",
+    "stat4Num": "100%",
+    "stat4Text": "lawful & reliable defense"
+  },
+  "founder": {
+    "tag": "Managing Partner Statement",
+    "title": "Victory is not an accident, it is the result of meticulous strategy",
+    "quote": "«The law must always stand on the side of justice. Yet defending the truth demands intellect, authority, and unrelenting resilience. For our clients, we are not merely legal advisors — we are their unyielding fortress.»",
+    "name": "Alisher Agzamov",
+    "role": "Managing Partner, Senior Advocate",
+    "experience": "20 Years of Specialized Legal Practice"
+  },
+  "services": {
+    "tag": "Legal Services",
+    "title": "Our Legal Services",
+    "subtitle": "We handle a selective docket of cases. Each matter is led personally by senior counsel without delegation to junior assistants.",
+    "principlesTag": "Professional Standards",
+    "principlesTitle": "Principles of Work",
+    "principlesSubtitle": "Core operational principles we uphold across every engagement to ensure decisive victory."
+  },
+  "team": {
+    "tag": "Our Counsel",
+    "title": "Distinguished Attorneys & Legal Advisors",
+    "subtitle": "Our firm unites accomplished advocates with proven court records and sterling professional reputations.",
+    "viewProfile": "View Profile"
+  },
+  "partners": {
+    "tag": "Trusted By Leaders",
+    "title": "Our Esteemed Clients & Partners",
+    "subtitle": "Market leaders and reputable institutions entrust their mission-critical legal affairs to our firm."
+  },
+  "news": {
+    "tag": "Legal Insights",
+    "title": "Latest Insights & Case Studies",
+    "subtitle": "Critical legislative reforms, court precedent analysis, and tactical legal counsel from our senior partners.",
+    "publishedOn": "Published",
+    "readTime": "min read",
+    "featuredTag": "Lead Analysis",
+    "readArticle": "Read Full Analysis"
+  },
+  "faq": {
+    "tag": "Frequently Asked",
+    "title": "Frequently Asked Questions",
+    "subtitle": "Clear, concise answers to common inquiries from prospective and existing clients."
+  },
+  "contact": {
+    "tag": "Contact",
+    "title": "Request a Confidential Consultation",
+    "subtitle": "Our legal team will analyze your inquiries and reach out to you within 15 minutes.",
+    "fullName": "Your Full Name",
+    "phone": "Phone Number",
+    "service": "Select Practice Area",
+    "message": "Briefly describe your legal inquiry",
+    "submit": "Submit Request",
+    "submitting": "Submitting...",
+    "successMessage": "Your request has been received! Our legal specialist will contact you shortly.",
+    "directContact": "Direct Channels",
+    "telegram": "Contact via Telegram",
+    "officeLocation": "Headquarters Location"
+  },
+  "footer": {
+    "description": "AGZAMOV LEGAL GROUP — Uncompromising protection for your business and legal rights. Premier legal services in Tashkent, Uzbekistan.",
+    "navigation": "Navigation",
+    "practiceAreas": "Practices",
+    "contactInfo": "Contact Information",
+    "allRightsReserved": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}
