@@ -1,46 +1,88 @@
 import React from 'react';
 import Image from 'next/image';
-import { setRequestLocale, getTranslations } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { Container } from '@/components/common/Container';
-import { SectionHeading } from '@/components/common/SectionHeading';
-import { GlowBadge } from '@/components/common/GlowBadge';
 import { Button } from '@/components/common/Button';
 import { mockWorkers } from '@/data/mockData';
 import { Locale } from '@/types';
-import { Mail, Phone, ShieldCheck, Award, ArrowRight } from 'lucide-react';
+import { Mail, Phone, ShieldCheck, ArrowRight } from 'lucide-react';
 
 interface TeamPageProps {
   params: Promise<{ locale: string }>;
 }
 
+const teamDict = {
+  metaTitle: {
+    uz: 'Jamoamiz — AGZAMOV LEGAL GROUP',
+    ru: 'Наша Команда — AGZAMOV LEGAL GROUP',
+    en: 'Our Team — AGZAMOV LEGAL GROUP',
+  },
+  metaDesc: {
+    uz: 'AGZAMOV LEGAL GROUP yetakchi advokatlari, boshqaruvchi hamkorlari va huquqshunos mutaxassislari.',
+    ru: 'Ведущие адвокаты, управляющие партнеры и юристы AGZAMOV LEGAL GROUP.',
+    en: 'Leading advocates, managing partners, and legal counselors of AGZAMOV LEGAL GROUP.',
+  },
+  title: {
+    uz: 'Bizning Jamoa',
+    ru: 'Наша Команда',
+    en: 'Our Team',
+  },
+  subtitle: {
+    uz: 'O‘z sohasining yetakchi advokatlari, sobiq sudyalar va yirik korporatsiyalarning bosh huquqshunoslari sizning manfaatlaringizni himoya qilish uchun birlashgan.',
+    ru: 'Ведущие адвокаты, бывшие судьи и главные юристы корпораций, объединившиеся для бескомпромиссной защиты ваших интересов.',
+    en: 'Leading attorneys, former judges, and senior corporate counsels united to protect your rights and business interests.',
+  },
+  specializationLabel: {
+    uz: 'Ixtisoslik',
+    ru: 'Специализация',
+    en: 'Specialization',
+  },
+  bookConsultation: {
+    uz: 'Uchrashuv belgilash',
+    ru: 'Записаться на встречу',
+    en: 'Schedule Consultation',
+  },
+  joinTitle: {
+    uz: 'Jamoamizga qo‘shilmoqchimisiz?',
+    ru: 'Хотите присоединиться к команде?',
+    en: 'Interested in joining our team?',
+  },
+  joinSubtitle: {
+    uz: 'Agar siz yuksak kasbiy mahoratga va kuchli tahliliy fikrlashga ega huquqshunos bo‘lsangiz, rezyumeyingizni bizga yuboring.',
+    ru: 'Если вы обладаете высокой квалификацией, аналитическим мышлением и безупречной этикой, отправьте нам свое резюме.',
+    en: 'If you are an exceptional legal mind with analytical rigor and high ethical standards, send us your resume.',
+  },
+  sendCv: {
+    uz: 'Rezyumeni yuborish (hr@agzamovlegal.uz)',
+    ru: 'Отправить резюме (hr@agzamovlegal.uz)',
+    en: 'Send Resume (hr@agzamovlegal.uz)',
+  },
+};
+
 export async function generateMetadata({ params }: TeamPageProps) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'nav' });
+  const currentLocale = (['uz', 'ru', 'en'].includes(locale) ? locale : 'ru') as Locale;
   return {
-    title: `${t('team')} — AGZAMOV LEGAL GROUP`,
-    description:
-      'AGZAMOV LEGAL GROUP yetakchi advokatlari, boshqaruvchi hamkorlari va huquqshunos mutaxassislari.',
+    title: teamDict.metaTitle[currentLocale],
+    description: teamDict.metaDesc[currentLocale],
   };
 }
 
 export default async function TeamPage({ params }: TeamPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const currentLocale = locale as Locale;
+  const currentLocale = (['uz', 'ru', 'en'].includes(locale) ? locale : 'ru') as Locale;
 
   return (
     <div className="pt-28 pb-20 bg-black min-h-screen">
       {/* Banner */}
-      <section className="py-16 border-b border-zinc-900 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-red-700/10 blur-[150px] pointer-events-none" />
-
-        <Container className="relative z-10 text-center space-y-5">
-          <GlowBadge icon>Professional Advokatura</GlowBadge>
+      <section className="py-16 border-b border-zinc-900 relative">
+        <Container className="text-center space-y-4 max-w-4xl">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
-            Bizning Jamoa
+            {teamDict.title[currentLocale]}
           </h1>
-          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl mx-auto leading-relaxed">
-            O&apos;z sohasining yetakchi advokatlari, sobiq sudyalar va yirik korporatsiyalarning bosh huquqshunoslari sizning manfaatlaringizni himoya qilish uchun birlashgan.
+          <p className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+            {teamDict.subtitle[currentLocale]}
           </p>
         </Container>
       </section>
@@ -52,7 +94,7 @@ export default async function TeamPage({ params }: TeamPageProps) {
             {mockWorkers.map((worker) => (
               <div
                 key={worker.id}
-                className="bento-card p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start group"
+                className="group rounded-2xl bg-zinc-950/80 border border-zinc-800/80 hover:border-zinc-700 transition-all duration-300 p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start"
               >
                 {/* Photo Column */}
                 <div className="relative h-64 sm:h-72 w-full sm:w-52 shrink-0 rounded-2xl overflow-hidden bg-zinc-900 border border-zinc-800">
@@ -65,7 +107,7 @@ export default async function TeamPage({ params }: TeamPageProps) {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60" />
                   <div className="absolute bottom-3 left-3 right-3">
-                    <span className="px-2.5 py-1 rounded-full bg-black/80 border border-red-600/40 text-[10px] font-bold text-red-500 uppercase tracking-wider backdrop-blur-md">
+                    <span className="px-3 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/80 text-[11px] font-medium text-zinc-300 backdrop-blur-md">
                       {worker.experience[currentLocale]}
                     </span>
                   </div>
@@ -81,8 +123,8 @@ export default async function TeamPage({ params }: TeamPageProps) {
                       {worker.position[currentLocale]}
                     </p>
                     {worker.specialization && (
-                      <p className="text-xs text-zinc-400 font-mono">
-                        Ixtisoslik: {worker.specialization[currentLocale]}
+                      <p className="text-xs text-zinc-400">
+                        {teamDict.specializationLabel[currentLocale]}: {worker.specialization[currentLocale]}
                       </p>
                     )}
                     <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed pt-2">
@@ -91,30 +133,30 @@ export default async function TeamPage({ params }: TeamPageProps) {
                   </div>
 
                   {/* Contacts & Direct Action */}
-                  <div className="pt-4 border-t border-zinc-800/80 flex items-center justify-between gap-3">
+                  <div className="pt-4 border-t border-zinc-900 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2">
                       {worker.phone && (
                         <a
                           href={`tel:${worker.phone}`}
-                          className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-red-600/50 hover:bg-red-600/10 transition-colors"
+                          className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors"
                           title={worker.phone}
                         >
-                          <Phone className="w-4 h-4 text-red-600" />
+                          <Phone className="w-4 h-4 text-zinc-400" />
                         </a>
                       )}
                       {worker.email && (
                         <a
                           href={`mailto:${worker.email}`}
-                          className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-red-600/50 hover:bg-red-600/10 transition-colors"
+                          className="p-2 rounded-xl bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 transition-colors"
                           title={worker.email}
                         >
-                          <Mail className="w-4 h-4 text-red-600" />
+                          <Mail className="w-4 h-4 text-zinc-400" />
                         </a>
                       )}
                     </div>
 
                     <Button href="/contact" size="sm" variant="outline">
-                      Uchrashuv belgilash
+                      {teamDict.bookConsultation[currentLocale]}
                     </Button>
                   </div>
                 </div>
@@ -125,15 +167,15 @@ export default async function TeamPage({ params }: TeamPageProps) {
       </section>
 
       {/* Careers Callout */}
-      <section className="py-20 bg-zinc-950/60 border-t border-zinc-900">
+      <section className="py-20 bg-zinc-950/40 border-t border-zinc-900">
         <Container>
-          <div className="bento-card p-8 sm:p-12 border-red-600/40 text-center max-w-4xl mx-auto space-y-6">
-            <ShieldCheck className="w-12 h-12 text-red-600 mx-auto" />
+          <div className="rounded-2xl bg-zinc-950 border border-zinc-800 p-8 sm:p-12 text-center max-w-4xl mx-auto space-y-6">
+            <ShieldCheck className="w-10 h-10 text-red-600 mx-auto" />
             <h2 className="text-2xl sm:text-3xl font-black text-white">
-              Jamoamizga Qo&apos;shilmoqchimisiz?
+              {teamDict.joinTitle[currentLocale]}
             </h2>
-            <p className="text-sm text-zinc-400 max-w-xl mx-auto">
-              Agar siz yuksak kasbiy mahoratga va kuchli tahliliy fikrlashga ega huquqshunos bo&apos;lsangiz, rezyumeyingizni bizga yuboring.
+            <p className="text-sm text-zinc-400 max-w-xl mx-auto leading-relaxed">
+              {teamDict.joinSubtitle[currentLocale]}
             </p>
             <Button
               href="mailto:hr@agzamovlegal.uz"
@@ -141,7 +183,7 @@ export default async function TeamPage({ params }: TeamPageProps) {
               variant="primary"
               icon={<ArrowRight className="w-4 h-4" />}
             >
-              Rezyumeni yuborish (hr@agzamovlegal.uz)
+              {teamDict.sendCv[currentLocale]}
             </Button>
           </div>
         </Container>

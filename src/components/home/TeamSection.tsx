@@ -15,11 +15,8 @@ export const TeamSection: React.FC = () => {
   const locale = useLocale() as Locale;
 
   return (
-    <section className="py-24 bg-gradient-to-b from-black via-zinc-950 to-black relative overflow-hidden">
-      {/* Background radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] bg-red-700/5 blur-[160px] pointer-events-none" />
-
-      <Container className="relative z-10 space-y-16">
+    <section className="py-24 bg-black relative">
+      <Container className="space-y-16">
         <div
           data-aos="fade-up"
           data-aos-duration="800"
@@ -43,7 +40,7 @@ export const TeamSection: React.FC = () => {
               data-aos="fade-up"
               data-aos-delay={idx * 120}
               data-aos-duration="750"
-              className="bento-card overflow-hidden group flex flex-col justify-between"
+              className="rounded-2xl bg-zinc-950/80 border border-zinc-800/80 hover:border-zinc-700 transition-all duration-300 overflow-hidden group flex flex-col justify-between"
             >
               {/* Image Container with Grayscale Effect */}
               <div className="relative h-72 w-full overflow-hidden bg-zinc-900">
@@ -58,7 +55,7 @@ export const TeamSection: React.FC = () => {
 
                 {/* Tag on Image */}
                 <div className="absolute top-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-black/80 border border-red-600/40 text-[10px] font-bold text-red-500 uppercase tracking-wider backdrop-blur-md">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/80 text-[11px] font-medium text-zinc-300 backdrop-blur-md">
                     <Shield className="w-3 h-3 text-red-600" />
                     {worker.id === 'w-1'
                       ? locale === 'ru'

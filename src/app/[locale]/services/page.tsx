@@ -2,7 +2,6 @@ import React from 'react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Container } from '@/components/common/Container';
 import { SectionHeading } from '@/components/common/SectionHeading';
-import { GlowBadge } from '@/components/common/GlowBadge';
 import { Button } from '@/components/common/Button';
 import { mockServices, mockPrinciples } from '@/data/mockData';
 import { Locale } from '@/types';
@@ -65,31 +64,121 @@ export async function generateMetadata({ params }: ServicesPageProps) {
 export default async function ServicesPage({ params }: ServicesPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const currentLocale = locale as Locale;
+  const currentLocale = (['ru', 'uz', 'en'].includes(locale) ? locale : 'ru') as Locale;
+
+  const pageContent = {
+    title: {
+      ru: 'Практики и Юридические Услуги',
+      uz: 'Bizning Xizmat Turlarimiz',
+      en: 'Legal Practices & Advisory Services',
+    },
+    subtitle: {
+      ru: 'Мы принимаем в производство строго ограниченное количество дел. Каждое поручение ведется лично старшими адвокатами без делегирования рядовым ассистентам.',
+      uz: 'Biz cheklangan miqdordagi ishlarni qabul qilamiz. Har bir ish — advokatning shaxsiy ishtirokida, yordamchilarga topshirilmasdan yuritiladi.',
+      en: 'We accept a strictly selective caseload. Every engagement is directed personally by senior counsel without delegation to junior assistants.',
+    },
+    principlesTitle: {
+      ru: 'Наши Стандарты Практики',
+      uz: 'Ish Tamoyillarimiz',
+      en: 'Institutional Standards of Practice',
+    },
+    principlesSub: {
+      ru: 'Бескомпромиссные регламенты судебной и процессуальной работы для достижения гарантированного правового результата.',
+      uz: "Har bir ishda maksimal natijaga erishish uchun biz qat'iy amal qiladigan qoidalar.",
+      en: 'Rigorous procedural methodologies formulated to maximize trial outcomes across high-value disputes.',
+    },
+    workflowTitle: {
+      ru: 'Методология Достижения Победы',
+      uz: "Qanday Qilib G'alabaga Erishamiz?",
+      en: 'Strategic Pathway to Legal Victory',
+    },
+    workflowSub: {
+      ru: 'Каждое поручение и судебный спор разрешаются по четкой 4-этапной системе аналитического и процессуального сопровождения.',
+      uz: 'Har bir nizo va loyihani 4 ta bosqichli tizimli metodologiya orqali hal qilamiz.',
+      en: 'Every dispute and engagement is structured across a disciplined 4-stage procedural framework.',
+    },
+    ctaTitle: {
+      ru: 'Какая юридическая помощь вам необходима?',
+      uz: 'Sizga Qaysi Xizmat Turida Yordam Kerak?',
+      en: 'Which Legal Practice Area Matches Your Matter?',
+    },
+    ctaDesc: {
+      ru: 'Изложите обстоятельства вашего спора или проекта. В течение 15 минут наши старшие адвокаты предоставят первичную правовую оценку.',
+      uz: 'Vaziyatingizni advokatimizga tushuntiring, 15 daqiqa ichida dastlabki yuridik baho va taklifni taqdim etamiz.',
+      en: 'Detail the parameters of your dispute or transaction. Senior counsel will formulate a preliminary merit appraisal within 15 minutes.',
+    },
+    ctaBtn: {
+      ru: 'Запросить правовую консультацию',
+      uz: "Maslahat uchun so'rov qoldirish",
+      en: 'Request Legal Consultation',
+    },
+    detailsBtn: {
+      ru: 'Подробнее',
+      uz: "Batafsil ma'lumot",
+      en: 'Practice Overview',
+    },
+    casesText: {
+      ru: 'дел',
+      uz: 'ish',
+      en: 'cases',
+    },
+  };
 
   const workflowSteps = [
     {
       step: '01',
-      title: 'Hujjatlarni Sinchkov Tahlil Qilish',
-      desc: 'Mavjud shartnomalar, dalillar va da‘volarni chuqur o‘rganib, real xavf va imkoniyatlarni aniqlaymiz.',
+      title: {
+        ru: 'Глубокий Правовой Аудит',
+        uz: 'Hujjatlarni Sinchkov Tahlil Qilish',
+        en: 'Exhaustive Document Audit',
+      },
+      desc: {
+        ru: 'Анализ договоров, доказательственной базы и регуляторных рисков с выявлением всех уязвимостей оппонентов.',
+        uz: 'Mavjud shartnomalar, dalillar va da‘volarni chuqur o‘rganib, real xavf va imkoniyatlarni aniqlaymiz.',
+        en: 'Scrutinizing contracts, evidentiary records, and statutory exposures to identify opponent vulnerabilities.',
+      },
       icon: <FileSearch className="w-6 h-6 text-red-600" />,
     },
     {
       step: '02',
-      title: 'G‘oliblik Strategiyasini Tuzish',
-      desc: 'Sud amaliyoti va qonun talablari asosida har bir bosqich uchun aniq taktik reja ishlab chiqamiz.',
+      title: {
+        ru: 'Формирование Победной Стратегии',
+        uz: 'G‘oliblik Strategiyasini Tuzish',
+        en: 'Precedent-Setting Strategy',
+      },
+      desc: {
+        ru: 'Разработка пошагового процессуального плана с учетом свежей практики Верховного и экономических судов.',
+        uz: 'Sud amaliyoti va qonun talablari asosida har bir bosqich uchun aniq taktik reja ishlab chiqamiz.',
+        en: 'Formulating step-by-step procedural playbooks leveraging recent Supreme & Economic Court precedents.',
+      },
       icon: <Compass className="w-6 h-6 text-red-600" />,
     },
     {
       step: '03',
-      title: 'Muzokaralar va Sud Himoyasi',
-      desc: 'Sud majlislarida murosasiz himoya qilamiz yoki nizoni suddan tashqari maksimal foydali kelishuv bilan hal etamiz.',
+      title: {
+        ru: 'Судебная Защита и Переговоры',
+        uz: 'Muzokaralar va Sud Himoyasi',
+        en: 'Trial Advocacy & Settlement',
+      },
+      desc: {
+        ru: 'Бескомпромиссное ведение процесса в заседаниях либо достижение взаимовыгодного мирового соглашения.',
+        uz: 'Sud majlislarida murosasiz himoya qilamiz yoki nizoni suddan tashqari maksimal foydali kelishuv bilan hal etamiz.',
+        en: 'Relentless courtroom representation or structuring airtight, highly advantageous out-of-court settlements.',
+      },
       icon: <Gavel className="w-6 h-6 text-red-600" />,
     },
     {
       step: '04',
-      title: 'Ijroni Ta‘minlash va Natija',
-      desc: 'Qaror qabul qilinishi bilan cheklanmay, mablag‘ yoki mulkning mijozga to‘liq qaytarilishini ta‘minlaymiz.',
+      title: {
+        ru: 'Фактическое Исполнение Решения',
+        uz: 'Ijroni Ta‘minlash va Natija',
+        en: 'Enforcement & Asset Recovery',
+      },
+      desc: {
+        ru: 'Мы доводим дело до реального взыскания задолженности, снятия арестов и защиты активов на балансе.',
+        uz: 'Qaror qabul qilinishi bilan cheklanmay, mablag‘ yoki mulkning mijozga to‘liq qaytarilishini ta‘minlaymiz.',
+        en: 'Ensuring total post-judgment enforcement, asset recovery, release of liens, and balance-sheet integrity.',
+      },
       icon: <Trophy className="w-6 h-6 text-red-600" />,
     },
   ];
@@ -97,16 +186,13 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
   return (
     <div className="pt-28 pb-20 bg-black min-h-screen">
       {/* Banner */}
-      <section className="py-16 border-b border-zinc-900 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-red-700/10 blur-[150px] pointer-events-none" />
-
-        <Container className="relative z-10 text-center space-y-5">
-          <GlowBadge icon>Yuridik xizmatlar</GlowBadge>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
-            Bizning Xizmat Turlarimiz
+      <section className="py-16 sm:py-20 border-b border-zinc-900 relative overflow-hidden">
+        <Container className="relative z-10 text-center space-y-4 max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
+            {pageContent.title[currentLocale]}
           </h1>
-          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl mx-auto leading-relaxed">
-            Biz cheklangan miqdordagi ishlarni qabul qilamiz. Har bir ish — advokatning shaxsiy ishtirokida, yordamchilarga topshirilmasdan yuritiladi.
+          <p className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed pt-1">
+            {pageContent.subtitle[currentLocale]}
           </p>
         </Container>
       </section>
@@ -157,12 +243,12 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
                       href={`/services/${service.slug}`}
                       className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-400 group-hover:text-red-500 transition-colors"
                     >
-                      <span>Batafsil ma&apos;lumot</span>
+                      <span>{pageContent.detailsBtn[currentLocale]}</span>
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
                     </Link>
 
-                    <span className="text-[11px] font-mono text-zinc-600">
-                      {service.casesCount}+ ish
+                    <span className="text-[11px] font-mono text-zinc-500">
+                      {service.casesCount}+ {pageContent.casesText[currentLocale]}
                     </span>
                   </div>
                 </div>
@@ -176,9 +262,9 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
       <section className="py-20 bg-zinc-950/70 border-t border-zinc-900">
         <Container className="space-y-12">
           <SectionHeading
-            tag="Standartlarimiz"
-            title="Ish Tamoyillarimiz"
-            subtitle="Har bir ishda maksimal natijaga erishish uchun biz qat'iy amal qiladigan qoidalar."
+            title={pageContent.principlesTitle[currentLocale]}
+            subtitle={pageContent.principlesSub[currentLocale]}
+            dark
           />
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -208,7 +294,7 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
 
                 <div className="pt-4 mt-5 border-t border-white/[0.06] flex items-center justify-between">
                   <span className="text-[10px] font-mono tracking-widest text-zinc-600 uppercase">
-                    Tamoyil 0{pIdx + 1}
+                    {currentLocale === 'ru' ? 'Принцип' : currentLocale === 'en' ? 'Principle' : 'Tamoyil'} 0{pIdx + 1}
                   </span>
                 </div>
               </div>
@@ -221,14 +307,14 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
       <section className="py-20 bg-zinc-950/60 border-y border-zinc-900">
         <Container className="space-y-16">
           <SectionHeading
-            tag="Ish Jarayoni"
-            title="Qanday Qilib G'alabaga Erishamiz?"
-            subtitle="Har bir nizo va loyihani 4 ta bosqichli tizimli metodologiya orqali hal qilamiz."
+            title={pageContent.workflowTitle[currentLocale]}
+            subtitle={pageContent.workflowSub[currentLocale]}
+            dark
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {workflowSteps.map((step) => (
-              <div key={step.step} className="bento-card p-6 sm:p-7 space-y-4 relative">
+              <div key={step.step} className="rounded-2xl p-6 sm:p-7 bg-zinc-950/80 border border-zinc-800 space-y-4 relative shadow-lg">
                 <span className="text-3xl font-black text-red-600/40 font-mono">
                   {step.step}
                 </span>
@@ -236,10 +322,10 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
                   {step.icon}
                 </div>
                 <h3 className="text-base font-bold text-white">
-                  {step.title}
+                  {step.title[currentLocale]}
                 </h3>
                 <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                  {step.desc}
+                  {step.desc[currentLocale]}
                 </p>
               </div>
             ))}
@@ -248,17 +334,17 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
       </section>
 
       {/* Consultation Banner */}
-      <section className="py-20">
+      <section className="py-20 sm:py-24">
         <Container>
-          <div className="bento-card p-8 sm:p-12 border-red-600/40 text-center max-w-4xl mx-auto space-y-6">
+          <div className="rounded-3xl p-8 sm:p-12 lg:p-14 bg-zinc-950 border border-zinc-800 text-center max-w-4xl mx-auto space-y-6 shadow-2xl">
             <h2 className="text-2xl sm:text-3xl font-black text-white">
-              Sizga Qaysi Xizmat Turida Yordam Kerak?
+              {pageContent.ctaTitle[currentLocale]}
             </h2>
             <p className="text-sm text-zinc-400 max-w-xl mx-auto">
-              Vaziyatingizni advokatimizga tushuntiring, 15 daqiqa ichida dastlabki yuridik baho va taklifni taqdim etamiz.
+              {pageContent.ctaDesc[currentLocale]}
             </p>
             <Button href="/contact" size="lg" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>
-              Maslahat uchun so&apos;rov qoldirish
+              {pageContent.ctaBtn[currentLocale]}
             </Button>
           </div>
         </Container>

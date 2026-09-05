@@ -1,45 +1,78 @@
 import React from 'react';
 import Image from 'next/image';
-import { setRequestLocale, getTranslations } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { Container } from '@/components/common/Container';
-import { GlowBadge } from '@/components/common/GlowBadge';
 import { mockNews } from '@/data/mockData';
 import { Locale } from '@/types';
 import { Link } from '@/i18n/routing';
-import { Calendar, Clock, ArrowRight, BookOpen } from 'lucide-react';
+import { Calendar, Clock, ArrowRight } from 'lucide-react';
 
 interface NewsPageProps {
   params: Promise<{ locale: string }>;
 }
 
+const contentDict = {
+  metaTitle: {
+    uz: 'Yangiliklar va Huquqiy Tahlillar — AGZAMOV LEGAL GROUP',
+    ru: 'Новости и Правовой Анализ — AGZAMOV LEGAL GROUP',
+    en: 'News and Legal Insights — AGZAMOV LEGAL GROUP',
+  },
+  metaDesc: {
+    uz: 'Qonunchilikdagi so‘nggi o‘zgarishlar, sud amaliyoti tahlillari va yuridik tavsiyalar.',
+    ru: 'Последние изменения в законодательстве, анализ судебной практики и юридические рекомендации.',
+    en: 'Recent legislative updates, case law analysis, and executive legal counsel.',
+  },
+  title: {
+    uz: 'Yangiliklar va Maqolalar',
+    ru: 'Новости и Статьи',
+    en: 'News and Articles',
+  },
+  subtitle: {
+    uz: 'Qonunchilikdagi yangi qarorlar, sud pretsedentlari va biznesni huquqiy xavflardan asrash bo‘yicha advokatlarimiz tahlili.',
+    ru: 'Актуальные изменения законодательства, судебная практика и аналитические обзоры экспертов для защиты бизнеса.',
+    en: 'Latest regulatory developments, judicial precedents, and expert legal analysis to safeguard your business.',
+  },
+  readMinutes: {
+    uz: 'daqiqa mutolaa',
+    ru: 'мин чтения',
+    en: 'min read',
+  },
+  author: {
+    uz: 'Muallif',
+    ru: 'Автор',
+    en: 'Author',
+  },
+  readMore: {
+    uz: 'Batafsil o‘qish',
+    ru: 'Читать далее',
+    en: 'Read full article',
+  },
+};
+
 export async function generateMetadata({ params }: NewsPageProps) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: 'nav' });
+  const currentLocale = (['uz', 'ru', 'en'].includes(locale) ? locale : 'ru') as Locale;
   return {
-    title: `${t('news')} — AGZAMOV LEGAL GROUP`,
-    description:
-      'Qonunchilikdagi so‘nggi o‘zgarishlar, sud amaliyoti tahlillari va yuridik tavsiyalar.',
+    title: contentDict.metaTitle[currentLocale],
+    description: contentDict.metaDesc[currentLocale],
   };
 }
 
 export default async function NewsPage({ params }: NewsPageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const currentLocale = locale as Locale;
+  const currentLocale = (['uz', 'ru', 'en'].includes(locale) ? locale : 'ru') as Locale;
 
   return (
     <div className="pt-28 pb-20 bg-black min-h-screen">
       {/* Banner */}
-      <section className="py-16 border-b border-zinc-900 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-red-700/10 blur-[150px] pointer-events-none" />
-
-        <Container className="relative z-10 text-center space-y-5">
-          <GlowBadge icon>Huquqiy tahlillar va yangiliklar</GlowBadge>
+      <section className="py-16 border-b border-zinc-900 relative">
+        <Container className="text-center space-y-4 max-w-4xl">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
-            Yangiliklar va Maqolalar
+            {contentDict.title[currentLocale]}
           </h1>
-          <p className="text-base sm:text-lg text-zinc-400 max-w-3xl mx-auto leading-relaxed">
-            Qonunchilikdagi yangi qarorlar, sud pretsedentlari va biznesni xavflardan asrash bo&apos;yicha advokatlarimiz tahlili.
+          <p className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+            {contentDict.subtitle[currentLocale]}
           </p>
         </Container>
       </section>
@@ -51,10 +84,10 @@ export default async function NewsPage({ params }: NewsPageProps) {
             {mockNews.map((article) => (
               <article
                 key={article.id}
-                className="bento-card overflow-hidden group flex flex-col justify-between"
+                className="group rounded-2xl bg-zinc-950/80 border border-zinc-800/80 hover:border-zinc-700 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between"
               >
                 <div>
-                  <div className="relative h-60 w-full overflow-hidden bg-zinc-900">
+                  <div className="relative h-56 w-full overflow-hidden bg-zinc-900">
                     <Image
                       src={article.thumbnail}
                       alt={article.title[currentLocale]}
@@ -62,10 +95,10 @@ export default async function NewsPage({ params }: NewsPageProps) {
                       className="object-cover group-hover:scale-105 filter grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500"
                       sizes="(max-width: 768px) 100vw, 400px"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-transparent to-transparent opacity-80" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
 
-                    <div className="absolute top-3 left-3">
-                      <span className="px-3 py-1 rounded-full bg-black/80 border border-red-600/40 text-[10px] font-bold text-red-500 uppercase tracking-wider backdrop-blur-md">
+                    <div className="absolute top-4 left-4">
+                      <span className="px-3 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/80 text-[11px] font-medium text-zinc-300 backdrop-blur-md">
                         {article.category[currentLocale]}
                       </span>
                     </div>
@@ -74,12 +107,12 @@ export default async function NewsPage({ params }: NewsPageProps) {
                   <div className="p-6 space-y-3">
                     <div className="flex items-center gap-4 text-xs text-zinc-500">
                       <span className="flex items-center gap-1.5">
-                        <Calendar className="w-3.5 h-3.5 text-red-600" />
+                        <Calendar className="w-3.5 h-3.5 text-zinc-400" />
                         {article.createdAt}
                       </span>
                       <span className="flex items-center gap-1.5">
-                        <Clock className="w-3.5 h-3.5 text-red-600" />
-                        {article.readTime} daqiqa
+                        <Clock className="w-3.5 h-3.5 text-zinc-400" />
+                        {article.readTime} {contentDict.readMinutes[currentLocale]}
                       </span>
                     </div>
 
@@ -95,16 +128,16 @@ export default async function NewsPage({ params }: NewsPageProps) {
                   </div>
                 </div>
 
-                <div className="p-6 pt-0 border-t border-zinc-800/60 mt-4">
+                <div className="p-6 pt-0 border-t border-zinc-900 mt-4">
                   <div className="flex items-center justify-between pt-4">
-                    <span className="text-xs text-zinc-500 font-mono">
-                      Muallif: {article.author}
+                    <span className="text-xs text-zinc-500">
+                      {contentDict.author[currentLocale]}: {article.author}
                     </span>
                     <Link
                       href={`/news/${article.slug}`}
-                      className="text-xs font-bold text-red-500 hover:text-red-400 inline-flex items-center gap-1.5 uppercase tracking-wider group-hover:translate-x-1 transition-transform"
+                      className="text-xs font-semibold text-red-500 hover:text-red-400 inline-flex items-center gap-1.5 tracking-wide group-hover:translate-x-1 transition-transform"
                     >
-                      <span>To&apos;liq o&apos;qish</span>
+                      <span>{contentDict.readMore[currentLocale]}</span>
                       <ArrowRight className="w-3.5 h-3.5" />
                     </Link>
                   </div>

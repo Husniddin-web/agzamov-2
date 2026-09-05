@@ -19,10 +19,7 @@ export const Footer: React.FC = () => {
   const locale = useLocale() as Locale;
 
   return (
-    <footer className="relative bg-black border-t border-zinc-900 pt-20 pb-6 overflow-hidden">
-      {/* Subtle background glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[150px] bg-red-700/10 blur-[120px] pointer-events-none" />
-
+    <footer className="relative bg-black border-t border-zinc-900 pt-20 pb-6">
       <Container className="relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 pb-16 border-b border-zinc-900">
           
