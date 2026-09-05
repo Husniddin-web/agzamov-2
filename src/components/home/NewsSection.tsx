@@ -23,9 +23,6 @@ export const NewsSection: React.FC = () => {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-zinc-100 pb-8"
         >
           <div className="space-y-3 max-w-2xl text-left">
-            <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-[#b91c1c]">
-              {t('tag')}
-            </p>
             <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-bold text-zinc-950 tracking-tight leading-[1.18]">
               {t('title')}
             </h2>

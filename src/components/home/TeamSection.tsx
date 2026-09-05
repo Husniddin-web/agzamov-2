@@ -26,7 +26,6 @@ export const TeamSection: React.FC = () => {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6"
         >
           <SectionHeading
-            tag={t('tag')}
             title={t('title')}
             subtitle={t('subtitle')}
             centered={false}

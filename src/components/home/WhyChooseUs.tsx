@@ -64,13 +64,6 @@ export const WhyChooseUs: React.FC = () => {
             data-aos-duration="850"
             className="lg:col-span-6 space-y-6 text-left"
           >
-            {/* Red Eyebrow Tag with Red Line */}
-            <div>
-              <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-[#b91c1c]">
-                {t('tag')}
-              </p>
-            </div>
-
             {/* Authoritative Headline (Matching Hero Typography) */}
             <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-zinc-950 tracking-tight leading-[1.18]">
               {t('titleLine1')}

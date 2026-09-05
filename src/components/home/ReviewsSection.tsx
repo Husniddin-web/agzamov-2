@@ -70,15 +70,25 @@ const sectionBadge: Record<Locale, string> = {
 export const ReviewsSection: React.FC = () => {
   const locale = useLocale() as Locale;
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
+  const changeSlide = useCallback((newIdx: number) => {
+    if (newIdx === currentIndex || isFading) return;
+    setIsFading(true);
+    setTimeout(() => {
+      setCurrentIndex(newIdx);
+      setIsFading(false);
+    }, 250);
+  }, [currentIndex, isFading]);
+
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % reviewsData.length);
-  }, []);
+    changeSlide((currentIndex + 1) % reviewsData.length);
+  }, [changeSlide, currentIndex]);
 
   const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + reviewsData.length) % reviewsData.length);
-  }, []);
+    changeSlide((currentIndex - 1 + reviewsData.length) % reviewsData.length);
+  }, [changeSlide, currentIndex]);
 
   // Automatic slide every 6 seconds (pauses on mouse hover)
   useEffect(() => {
@@ -95,17 +105,6 @@ export const ReviewsSection: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-red-950/25 rounded-full blur-[180px] pointer-events-none" />
 
       <Container className="relative z-10 text-center">
-        
-        {/* Top Minimal Badge */}
-        <div
-          data-aos="fade-up"
-          data-aos-duration="800"
-          className="flex justify-center mb-10"
-        >
-          <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-red-500 text-center">
-            {sectionBadge[locale] || sectionBadge.uz}
-          </p>
-        </div>
 
         {/* Large Central Testimonial Showcase (Not a box card, wide editorial format) */}
         <div
@@ -122,35 +121,39 @@ export const ReviewsSection: React.FC = () => {
             <Quote className="w-6 h-6 fill-red-500/20 text-red-500" />
           </div>
 
-          {/* Large Editorial Quote Typography with Smooth Fade Transition */}
-          <div className="min-h-[160px] sm:min-h-[140px] flex items-center justify-center">
-            <blockquote
-              key={currentReview.id}
-              className="text-xl sm:text-2xl md:text-3xl lg:text-[30px] text-zinc-100 font-light leading-relaxed tracking-tight text-center transition-all duration-500 animate-in fade-in zoom-in-95"
-            >
-              “{currentReview.quote[locale] || currentReview.quote.uz}”
-            </blockquote>
-          </div>
-
-          {/* 5-Star Rating Row */}
-          <div className="flex items-center justify-center gap-1.5 text-amber-500 mt-8 mb-4">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
-            ))}
-          </div>
-
-          {/* Client Identity & Company Attribution */}
-          <div className="flex items-center justify-center gap-4 mt-2">
-            <div className="w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center text-xs font-black text-white tracking-wider shadow-lg shadow-black/80 shrink-0">
-              {currentReview.company.substring(0, 3)}
+          {/* Smooth Fade Transition Container for Review Content */}
+          <div
+            className={`transition-all duration-300 ease-in-out ${
+              isFading ? 'opacity-0 translate-y-1' : 'opacity-100 translate-y-0'
+            }`}
+          >
+            {/* Large Editorial Quote Typography */}
+            <div className="min-h-[160px] sm:min-h-[140px] flex items-center justify-center">
+              <blockquote className="text-xl sm:text-2xl md:text-3xl lg:text-[30px] text-zinc-100 font-light leading-relaxed tracking-tight text-center">
+                “{currentReview.quote[locale] || currentReview.quote.uz}”
+              </blockquote>
             </div>
-            <div className="text-left">
-              <h4 className="text-base font-bold text-white tracking-wide">
-                {currentReview.company}
-              </h4>
-              <p className="text-xs text-zinc-400 font-medium">
-                {currentReview.author} • <span className="text-zinc-500">{currentReview.role}</span>
-              </p>
+
+            {/* 5-Star Rating Row */}
+            <div className="flex items-center justify-center gap-1.5 text-amber-500 mt-8 mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-4 h-4 fill-amber-500 text-amber-500" />
+              ))}
+            </div>
+
+            {/* Client Identity & Company Attribution */}
+            <div className="flex items-center justify-center gap-4 mt-2">
+              <div className="w-12 h-12 rounded-full bg-black border border-white/20 flex items-center justify-center text-xs font-black text-white tracking-wider shadow-lg shadow-black/80 shrink-0">
+                {currentReview.company.substring(0, 3)}
+              </div>
+              <div className="text-left">
+                <h4 className="text-base font-bold text-white tracking-wide">
+                  {currentReview.company}
+                </h4>
+                <p className="text-xs text-zinc-400 font-medium">
+                  {currentReview.author} • <span className="text-zinc-500">{currentReview.role}</span>
+                </p>
+              </div>
             </div>
           </div>
 
@@ -170,7 +173,7 @@ export const ReviewsSection: React.FC = () => {
               {reviewsData.map((_, i) => (
                 <button
                   key={i}
-                  onClick={() => setCurrentIndex(i)}
+                  onClick={() => changeSlide(i)}
                   aria-label={`Go to slide ${i + 1}`}
                   className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                     i === currentIndex

@@ -22,7 +22,6 @@ export const FaqSection: React.FC = () => {
       <Container className="relative z-10 space-y-16">
         <div data-aos="fade-up" data-aos-duration="800">
           <SectionHeading
-            tag={t('tag')}
             title={t('title')}
             subtitle={t('subtitle')}
           />

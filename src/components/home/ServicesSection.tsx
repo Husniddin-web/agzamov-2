@@ -78,9 +78,6 @@ export const ServicesSection: React.FC = () => {
           className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-white/10 pb-8"
         >
           <div className="space-y-3 max-w-3xl text-left">
-            <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-red-500">
-              {t('tag')}
-            </p>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight">
               {t('title')}
             </h2>
@@ -209,9 +206,6 @@ export const ServicesSection: React.FC = () => {
             data-aos-duration="800"
             className="text-left space-y-3 max-w-2xl"
           >
-            <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-red-500">
-              {t('principlesTag')}
-            </p>
             <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
               {t('principlesTitle')}
             </h3>

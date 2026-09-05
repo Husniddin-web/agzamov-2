@@ -102,32 +102,36 @@ const teamSlides: TeamMemberSliderItem[] = [
 export const FounderSection: React.FC = () => {
   const locale = useLocale() as Locale;
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isFading, setIsFading] = useState(false);
   const [isPaused, setIsPaused] = useState(false);
 
+  const changeSlide = useCallback((newIdx: number) => {
+    if (newIdx === currentIndex || isFading) return;
+    setIsFading(true);
+    setTimeout(() => {
+      setCurrentIndex(newIdx);
+      setIsFading(false);
+    }, 260);
+  }, [currentIndex, isFading]);
+
   const nextSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % teamSlides.length);
-  }, []);
+    changeSlide((currentIndex + 1) % teamSlides.length);
+  }, [changeSlide, currentIndex]);
 
   const prevSlide = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + teamSlides.length) % teamSlides.length);
-  }, []);
+    changeSlide((currentIndex - 1 + teamSlides.length) % teamSlides.length);
+  }, [changeSlide, currentIndex]);
 
-  // Auto-slide every 5.5s unless paused by mouse hover
+  // Auto-slide every 6s unless paused by mouse hover
   useEffect(() => {
     if (isPaused) return;
     const timer = setInterval(() => {
       nextSlide();
-    }, 5500);
+    }, 6000);
     return () => clearInterval(timer);
   }, [isPaused, nextSlide]);
 
   const current = teamSlides[currentIndex];
-
-  const categoryTitles: Record<Locale, string> = {
-    uz: 'Bizning Jamoa',
-    ru: 'Наша Команда',
-    en: 'Our Team',
-  };
 
   return (
     <section
@@ -138,51 +142,67 @@ export const FounderSection: React.FC = () => {
       <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
-          {/* Left Column: Team Member Photo Frame */}
+          {/* Left Column: Team Member Photo Frame with Smooth Crossfade */}
           <div className="lg:col-span-5 relative" data-aos="fade-right" data-aos-duration="850">
             <div className="relative mx-auto max-w-md">
-              <div className="relative rounded-3xl overflow-hidden border border-zinc-200/80 bg-white shadow-2xl">
+              <div className="relative rounded-3xl overflow-hidden border border-zinc-200/80 bg-zinc-900 shadow-2xl">
                 <div className="relative h-[480px] w-full">
-                  <Image
-                    key={current.id}
-                    src={current.image}
-                    alt={current.name}
-                    fill
-                    className="object-cover object-top filter contrast-105 transition-all duration-700 animate-in fade-in zoom-in-95 duration-500"
-                    sizes="(max-width: 768px) 100vw, 500px"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                  {teamSlides.map((slide, sIdx) => {
+                    const isActive = sIdx === currentIndex;
+                    return (
+                      <div
+                        key={slide.id}
+                        className={`absolute inset-0 transition-all duration-700 ease-in-out ${
+                          isActive
+                            ? 'opacity-100 scale-100 z-10'
+                            : 'opacity-0 scale-[1.04] pointer-events-none z-0'
+                        }`}
+                      >
+                        <Image
+                          src={slide.image}
+                          alt={slide.name}
+                          fill
+                          className="object-cover object-top filter contrast-105"
+                          sizes="(max-width: 768px) 100vw, 500px"
+                          priority={sIdx === 0}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-transparent pointer-events-none" />
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Category Text, Dynamic Headline, Quote & Slider Controls */}
+          {/* Right Column: Dynamic Headline, Quote & Slider Controls */}
           <div className="lg:col-span-7 space-y-7 text-left" data-aos="fade-left" data-aos-duration="850">
             
-            <p className="text-xs sm:text-[13px] font-semibold tracking-[0.22em] uppercase text-red-600">
-              {categoryTitles[locale] || categoryTitles.uz}
-            </p>
+            {/* Smooth Content Fade Container */}
+            <div
+              className={`space-y-7 transition-all duration-300 ease-in-out ${
+                isFading ? 'opacity-0 translate-y-1.5' : 'opacity-100 translate-y-0'
+              }`}
+            >
+              {/* Dynamic Headline */}
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-950 tracking-tight leading-tight min-h-[70px]">
+                {current.headline[locale]}
+              </h2>
 
-            {/* Dynamic Headline */}
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-zinc-950 tracking-tight leading-tight min-h-[70px] transition-all duration-300">
-              {current.headline[locale]}
-            </h2>
-
-            {/* Quote Block on Crisp White/Zinc Theme */}
-            <div className="relative p-6 sm:p-8 rounded-2xl bg-white border-l-4 border-l-red-600 border border-zinc-200/80 space-y-4 shadow-xl">
-              <Quote className="w-9 h-9 text-red-600/30" />
-              <blockquote className="text-base sm:text-lg italic text-zinc-800 font-normal leading-relaxed min-h-[85px]">
-                {current.quote[locale]}
-              </blockquote>
-              <div className="pt-2">
-                <p className="text-base font-bold text-zinc-950 tracking-wide">
-                  {current.name}
-                </p>
-                <p className="text-xs font-semibold text-red-600 uppercase tracking-wider mt-0.5">
-                  {current.role[locale]}
-                </p>
+              {/* Quote Block on Crisp White/Zinc Theme */}
+              <div className="relative p-6 sm:p-8 rounded-2xl bg-white border-l-4 border-l-red-600 border border-zinc-200/80 space-y-4 shadow-xl">
+                <Quote className="w-9 h-9 text-red-600/30" />
+                <blockquote className="text-base sm:text-lg italic text-zinc-800 font-normal leading-relaxed min-h-[85px]">
+                  {current.quote[locale]}
+                </blockquote>
+                <div className="pt-2">
+                  <p className="text-base font-bold text-zinc-950 tracking-wide">
+                    {current.name}
+                  </p>
+                  <p className="text-xs font-semibold text-red-600 uppercase tracking-wider mt-0.5">
+                    {current.role[locale]}
+                  </p>
+                </div>
               </div>
             </div>
 
@@ -201,7 +221,7 @@ export const FounderSection: React.FC = () => {
                   <button
                     key={idx}
                     type="button"
-                    onClick={() => setCurrentIndex(idx)}
+                    onClick={() => changeSlide(idx)}
                     className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
                       currentIndex === idx
                         ? 'w-8 bg-red-600 shadow-md shadow-red-600/40'
