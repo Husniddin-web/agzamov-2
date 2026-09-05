@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { setRequestLocale } from 'next-intl/server';
 import { Container } from '@/components/common/Container';
+import { PageHeader } from '@/components/common/PageHeader';
 import { mockNews } from '@/data/mockData';
 import { Locale } from '@/types';
 import { Link } from '@/i18n/routing';
@@ -22,10 +23,20 @@ const contentDict = {
     ru: 'Последние изменения в законодательстве, анализ судебной практики и юридические рекомендации.',
     en: 'Recent legislative updates, case law analysis, and executive legal counsel.',
   },
+  home: {
+    uz: 'Bosh sahifa',
+    ru: 'Главная',
+    en: 'Home',
+  },
   title: {
     uz: 'Yangiliklar va Maqolalar',
     ru: 'Новости и Статьи',
     en: 'News and Articles',
+  },
+  eyebrow: {
+    uz: 'HUQUQIY TAHLIL VA YANGILIKLAR',
+    ru: 'ПРАВОВОЙ АНАЛИЗ И НОВОСТИ',
+    en: 'LEGAL INSIGHTS & CASE LAW',
   },
   subtitle: {
     uz: 'Qonunchilikdagi yangi qarorlar, sud pretsedentlari va biznesni huquqiy xavflardan asrash bo‘yicha advokatlarimiz tahlili.',
@@ -64,30 +75,38 @@ export default async function NewsPage({ params }: NewsPageProps) {
   const currentLocale = (['uz', 'ru', 'en'].includes(locale) ? locale : 'ru') as Locale;
 
   return (
-    <div className="pt-28 pb-20 bg-black min-h-screen">
-      {/* Banner */}
-      <section className="py-16 border-b border-zinc-900 relative">
-        <Container className="text-center space-y-4 max-w-4xl">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
-            {contentDict.title[currentLocale]}
-          </h1>
-          <p className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            {contentDict.subtitle[currentLocale]}
-          </p>
-        </Container>
-      </section>
+    <div className="bg-white min-h-screen">
+      {/* Top Hero Banner matching user reference image */}
+      <PageHeader
+        title={contentDict.title[currentLocale]}
+        eyebrow={contentDict.eyebrow[currentLocale]}
+        imageSrc="/banners/news-banner.jpg"
+        breadcrumbs={[
+          { label: contentDict.home[currentLocale], href: '/' },
+          { label: contentDict.title[currentLocale] },
+        ]}
+      />
 
-      {/* News Grid */}
-      <section className="py-20">
-        <Container>
+      {/* News Grid on Pure White Background */}
+      <section className="py-16 sm:py-24 bg-white">
+        <Container className="space-y-12">
+          <div className="max-w-3xl mx-auto text-center space-y-3">
+            <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 tracking-tight">
+              {contentDict.title[currentLocale]}
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
+              {contentDict.subtitle[currentLocale]}
+            </p>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {mockNews.map((article) => (
               <article
                 key={article.id}
-                className="group rounded-2xl bg-zinc-950/80 border border-zinc-800/80 hover:border-zinc-700 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between"
+                className="group rounded-2xl bg-white border border-zinc-200/90 shadow-sm hover:shadow-xl hover:border-zinc-300 hover:-translate-y-1 transition-all duration-300 overflow-hidden flex flex-col justify-between"
               >
                 <div>
-                  <div className="relative h-56 w-full overflow-hidden bg-zinc-900">
+                  <div className="relative h-56 w-full overflow-hidden bg-zinc-100">
                     <Image
                       src={article.thumbnail}
                       alt={article.title[currentLocale]}
@@ -95,10 +114,10 @@ export default async function NewsPage({ params }: NewsPageProps) {
                       className="object-cover group-hover:scale-105 filter grayscale contrast-110 group-hover:grayscale-0 transition-all duration-500"
                       sizes="(max-width: 768px) 100vw, 400px"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/30 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-60" />
 
                     <div className="absolute top-4 left-4">
-                      <span className="px-3 py-1 rounded-full bg-zinc-900/90 border border-zinc-700/80 text-[11px] font-medium text-zinc-300 backdrop-blur-md">
+                      <span className="px-3 py-1 rounded-full bg-white/95 text-zinc-900 text-[11px] font-bold shadow-sm backdrop-blur-md">
                         {article.category[currentLocale]}
                       </span>
                     </div>
@@ -116,26 +135,26 @@ export default async function NewsPage({ params }: NewsPageProps) {
                       </span>
                     </div>
 
-                    <h2 className="text-lg font-bold text-white group-hover:text-red-500 transition-colors leading-snug line-clamp-2">
+                    <h3 className="text-lg font-bold text-zinc-900 group-hover:text-red-700 transition-colors leading-snug line-clamp-2">
                       <Link href={`/news/${article.slug}`}>
                         {article.title[currentLocale]}
                       </Link>
-                    </h2>
+                    </h3>
 
-                    <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed line-clamp-3">
                       {article.excerpt[currentLocale]}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-6 pt-0 border-t border-zinc-900 mt-4">
+                <div className="p-6 pt-0 border-t border-zinc-100 mt-4">
                   <div className="flex items-center justify-between pt-4">
                     <span className="text-xs text-zinc-500">
                       {contentDict.author[currentLocale]}: {article.author}
                     </span>
                     <Link
                       href={`/news/${article.slug}`}
-                      className="text-xs font-semibold text-red-500 hover:text-red-400 inline-flex items-center gap-1.5 tracking-wide group-hover:translate-x-1 transition-transform"
+                      className="text-xs font-bold text-red-700 hover:text-red-800 inline-flex items-center gap-1.5 tracking-wide group-hover:translate-x-1 transition-transform"
                     >
                       <span>{contentDict.readMore[currentLocale]}</span>
                       <ArrowRight className="w-3.5 h-3.5" />

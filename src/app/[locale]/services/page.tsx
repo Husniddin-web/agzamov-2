@@ -1,8 +1,10 @@
 import React from 'react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { Container } from '@/components/common/Container';
+import { PageHeader } from '@/components/common/PageHeader';
 import { SectionHeading } from '@/components/common/SectionHeading';
 import { Button } from '@/components/common/Button';
+import { siteConfig } from '@/config/site';
 import { mockServices, mockPrinciples } from '@/data/mockData';
 import { Locale } from '@/types';
 import { Link } from '@/i18n/routing';
@@ -184,71 +186,78 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
   ];
 
   return (
-    <div className="pt-28 pb-20 bg-black min-h-screen">
-      {/* Banner */}
-      <section className="py-16 sm:py-20 border-b border-zinc-900 relative overflow-hidden">
-        <Container className="relative z-10 text-center space-y-4 max-w-4xl mx-auto">
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
-            {pageContent.title[currentLocale]}
-          </h1>
-          <p className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed pt-1">
-            {pageContent.subtitle[currentLocale]}
-          </p>
-        </Container>
-      </section>
+    <div className="bg-white min-h-screen">
+      <PageHeader
+        title={pageContent.title[currentLocale]}
+        eyebrow="AGZAMOV LEGAL GROUP"
+        imageSrc="/banners/services-banner.jpg"
+        breadcrumbs={[
+          { label: currentLocale === 'ru' ? 'Главная' : currentLocale === 'en' ? 'Home' : 'Bosh sahifa', href: '/' },
+          { label: pageContent.title[currentLocale] },
+        ]}
+      />
 
-      {/* Services Grid */}
-      <section className="py-20">
+      {/* Services Grid on Pure White Background */}
+      <section className="py-16 sm:py-24 bg-white">
         <Container className="space-y-12">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
+          <div className="max-w-3xl mx-auto text-center space-y-3">
+            <h2 className="text-2xl sm:text-3xl font-black text-zinc-900 tracking-tight">
+              {pageContent.title[currentLocale]}
+            </h2>
+            <p className="text-sm sm:text-base text-zinc-600 leading-relaxed">
+              {pageContent.subtitle[currentLocale]}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {mockServices.map((service, idx) => {
               const formattedNumber = `0${idx + 1}`;
 
               return (
                 <div
                   key={service.id}
-                  className="group relative rounded-2xl p-7 sm:p-8 bg-[#0c1017] hover:bg-gradient-to-b hover:from-red-950/20 hover:to-[#0c1017] border border-white/[0.08] hover:border-red-600/50 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.4)] hover:shadow-[0_0_35px_-5px_rgba(220,38,38,0.22)] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
+                  className="group relative rounded-2xl p-7 sm:p-8 bg-white border border-zinc-200/90 shadow-sm hover:shadow-xl hover:border-zinc-300 transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
                 >
                   <div>
                     <div className="flex items-center justify-between">
-                      <div className="w-12 h-12 rounded-xl bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-white group-hover:border-red-600/40 group-hover:bg-red-600/20 transition-all duration-300">
+                      <div className="w-12 h-12 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center text-red-700 transition-colors">
                         {iconMap[service.iconName] || <Scale className="w-5 h-5" />}
                       </div>
 
-                      <span className="font-mono text-4xl sm:text-5xl font-black text-transparent select-none [-webkit-text-stroke:1.5px_rgba(255,255,255,0.22)] group-hover:[-webkit-text-stroke:0px] group-hover:text-red-600 transition-all duration-300">
+                      <span className="font-mono text-3xl font-black text-zinc-300 group-hover:text-red-700 transition-colors select-none">
                         {formattedNumber}
                       </span>
                     </div>
 
-                    <h3 className="text-lg sm:text-xl font-bold text-white group-hover:text-white mt-6 mb-3 leading-snug tracking-tight transition-colors">
+                    <h3 className="text-lg sm:text-xl font-bold text-zinc-900 group-hover:text-red-700 mt-6 mb-3 leading-snug tracking-tight transition-colors">
                       {service.title[currentLocale]}
                     </h3>
 
-                    <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed line-clamp-3">
+                    <p className="text-xs sm:text-sm text-zinc-600 leading-relaxed line-clamp-3">
                       {service.shortDesc[currentLocale]}
                     </p>
 
-                    <ul className="space-y-2 pt-4 mt-4 border-t border-white/[0.06]">
+                    <ul className="space-y-2 pt-4 mt-4 border-t border-zinc-100">
                       {service.features[currentLocale].slice(0, 3).map((feat, fIdx) => (
-                        <li key={fIdx} className="flex items-center gap-2 text-xs text-zinc-400">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-red-600 shrink-0" />
+                        <li key={fIdx} className="flex items-center gap-2 text-xs text-zinc-600">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-red-700 shrink-0" />
                           <span className="line-clamp-1">{feat}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="pt-6 mt-6 border-t border-white/[0.06] flex items-center justify-between">
+                  <div className="pt-6 mt-6 border-t border-zinc-100 flex items-center justify-between">
                     <Link
                       href={`/services/${service.slug}`}
-                      className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-400 group-hover:text-red-500 transition-colors"
+                      className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-red-700 hover:text-red-800 transition-colors"
                     >
                       <span>{pageContent.detailsBtn[currentLocale]}</span>
-                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1.5 transition-transform" />
+                      <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </Link>
 
-                    <span className="text-[11px] font-mono text-zinc-500">
-                      {service.casesCount}+ {pageContent.casesText[currentLocale]}
+                    <span className="text-[11px] font-mono text-zinc-400">
+                      {siteConfig.name}
                     </span>
                   </div>
                 </div>
@@ -258,94 +267,101 @@ export default async function ServicesPage({ params }: ServicesPageProps) {
         </Container>
       </section>
 
-      {/* Principles Section */}
-      <section className="py-20 bg-zinc-950/70 border-t border-zinc-900">
-        <Container className="space-y-12">
-          <SectionHeading
-            title={pageContent.principlesTitle[currentLocale]}
-            subtitle={pageContent.principlesSub[currentLocale]}
-            dark
-          />
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {mockPrinciples.map((principle, pIdx) => (
-              <div
-                key={principle.id}
-                className="group relative rounded-2xl p-6 sm:p-7 bg-[#0b0e14] hover:bg-[#0f141f] border border-white/[0.08] hover:border-red-600/40 shadow-lg transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
-              >
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <span className="font-mono text-2xl font-black text-red-600/80 group-hover:text-red-500 transition-colors">
-                      {principle.number}
-                    </span>
-                    <div className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/10 flex items-center justify-center text-zinc-400 group-hover:text-red-500 group-hover:border-red-600/30 transition-all">
-                      {principleIcons[pIdx]}
-                    </div>
-                  </div>
-
-                  <h4 className="text-base sm:text-lg font-bold text-white group-hover:text-white leading-snug">
-                    {principle.title[currentLocale]}
-                  </h4>
-
-                  <p className="text-xs sm:text-[13px] text-zinc-400 font-normal leading-relaxed group-hover:text-zinc-300">
-                    {principle.desc[currentLocale]}
-                  </p>
-                </div>
-
-                <div className="pt-4 mt-5 border-t border-white/[0.06] flex items-center justify-between">
-                  <span className="text-[10px] font-mono tracking-widest text-zinc-600 uppercase">
-                    {currentLocale === 'ru' ? 'Принцип' : currentLocale === 'en' ? 'Principle' : 'Tamoyil'} 0{pIdx + 1}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* 4-Step Process Section */}
-      <section className="py-20 bg-zinc-950/60 border-y border-zinc-900">
+      {/* Workflow Section on Light Zinc Surface */}
+      <section className="py-20 bg-zinc-50 border-y border-zinc-200">
         <Container className="space-y-16">
           <SectionHeading
             title={pageContent.workflowTitle[currentLocale]}
             subtitle={pageContent.workflowSub[currentLocale]}
-            dark
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {workflowSteps.map((step) => (
-              <div key={step.step} className="rounded-2xl p-6 sm:p-7 bg-zinc-950/80 border border-zinc-800 space-y-4 relative shadow-lg">
-                <span className="text-3xl font-black text-red-600/40 font-mono">
-                  {step.step}
-                </span>
-                <div className="h-10 w-10 rounded-lg bg-red-600/10 flex items-center justify-center">
-                  {step.icon}
+              <div
+                key={step.step}
+                className="rounded-2xl p-6 sm:p-7 bg-white border border-zinc-200/90 shadow-sm flex flex-col justify-between space-y-4 hover:shadow-md transition-shadow"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-2xl font-black text-red-700">
+                      {step.step}
+                    </span>
+                    <div className="p-2.5 rounded-xl bg-red-50 border border-red-100 text-red-700">
+                      {step.icon}
+                    </div>
+                  </div>
+
+                  <h3 className="text-base font-bold text-zinc-900 leading-snug">
+                    {step.title[currentLocale]}
+                  </h3>
+
+                  <p className="text-xs sm:text-[13px] text-zinc-600 leading-relaxed">
+                    {step.desc[currentLocale]}
+                  </p>
                 </div>
-                <h3 className="text-base font-bold text-white">
-                  {step.title[currentLocale]}
-                </h3>
-                <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
-                  {step.desc[currentLocale]}
-                </p>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
-      {/* Consultation Banner */}
-      <section className="py-20 sm:py-24">
+      {/* Standards Section on Pure White */}
+      <section className="py-20 bg-white">
+        <Container className="space-y-16">
+          <SectionHeading
+            title={pageContent.principlesTitle[currentLocale]}
+            subtitle={pageContent.principlesSub[currentLocale]}
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {mockPrinciples.map((item, idx) => (
+              <div
+                key={item.id}
+                className="rounded-2xl p-7 bg-white border border-zinc-200/90 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+              >
+                <div className="space-y-4">
+                  <div className="h-10 w-10 rounded-xl bg-red-50 border border-red-100 flex items-center justify-center text-red-700">
+                    {principleIcons[idx] || <ShieldCheck className="w-5 h-5" />}
+                  </div>
+                  <h3 className="text-base font-bold text-zinc-900">
+                    {item.title[currentLocale]}
+                  </h3>
+                  <p className="text-xs sm:text-[13px] text-zinc-600 leading-relaxed">
+                    {item.desc[currentLocale]}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* Consultation CTA Card */}
+      <section className="py-20 bg-zinc-50 border-t border-zinc-200">
         <Container>
-          <div className="rounded-3xl p-8 sm:p-12 lg:p-14 bg-zinc-950 border border-zinc-800 text-center max-w-4xl mx-auto space-y-6 shadow-2xl">
-            <h2 className="text-2xl sm:text-3xl font-black text-white">
-              {pageContent.ctaTitle[currentLocale]}
-            </h2>
-            <p className="text-sm text-zinc-400 max-w-xl mx-auto">
-              {pageContent.ctaDesc[currentLocale]}
-            </p>
-            <Button href="/contact" size="lg" variant="primary" icon={<ArrowRight className="w-4 h-4" />}>
-              {pageContent.ctaBtn[currentLocale]}
-            </Button>
+          <div className="rounded-3xl bg-zinc-900 text-white p-8 sm:p-14 space-y-8">
+            <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+              <div className="space-y-3 max-w-2xl">
+                <span className="text-xs font-bold uppercase tracking-wider text-red-400">
+                  {siteConfig.name}
+                </span>
+                <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+                  {pageContent.ctaTitle[currentLocale]}
+                </h2>
+                <p className="text-sm sm:text-base text-zinc-300 leading-relaxed">
+                  {pageContent.ctaDesc[currentLocale]}
+                </p>
+              </div>
+
+              <div className="shrink-0 flex flex-col sm:flex-row gap-4">
+                <Button href="/contact" variant="primary" size="lg" icon={<ArrowRight className="w-4 h-4" />}>
+                  {pageContent.ctaBtn[currentLocale]}
+                </Button>
+                <Button href={`tel:${siteConfig.phoneClean}`} variant="outline" size="lg">
+                  {siteConfig.phone}
+                </Button>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
