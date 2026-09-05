@@ -126,19 +126,22 @@ export const WhyChooseUs: React.FC = () => {
               data-aos="fade-up"
               data-aos-delay={idx * 100}
               data-aos-duration="800"
-              className="relative bg-white rounded-2xl p-6 sm:p-7 border border-zinc-200/80 shadow-[0_4px_25px_-4px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_45px_-8px_rgba(185,28,28,0.14)] hover:border-[#b91c1c]/40 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between group overflow-hidden cursor-default"
+              className="relative bg-white rounded-2xl p-6 sm:p-7 border border-zinc-200/80 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.04)] hover:shadow-[0_20px_40px_-8px_rgba(185,28,28,0.12),0_4px_16px_-2px_rgba(0,0,0,0.04)] hover:border-red-600/35 hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col justify-between group overflow-hidden cursor-default"
             >
-              {/* Top edge accent highlight that reveals on hover */}
-              <div className="absolute top-0 inset-x-8 h-0.5 bg-gradient-to-r from-transparent via-[#b91c1c] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              {/* Top edge accent highlight that expands smoothly on hover */}
+              <div className="absolute top-0 inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-red-600 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out origin-center" />
 
-              <div>
-                {/* Icon Container with Morphing Transition */}
-                <div className="w-12 h-12 rounded-2xl bg-red-50 border border-red-100 flex items-center justify-center text-[#b91c1c] mb-5 group-hover:bg-[#b91c1c] group-hover:border-[#b91c1c] group-hover:text-white group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-red-900/25 transition-all duration-300">
+              {/* Subtle ambient warm tint on hover */}
+              <div className="absolute inset-0 bg-gradient-to-b from-red-600/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+              <div className="relative z-10">
+                {/* Icon Container with Smooth Transition */}
+                <div className="w-12 h-12 rounded-2xl bg-red-50/80 border border-red-100 flex items-center justify-center text-[#b91c1c] mb-5 group-hover:bg-[#b91c1c] group-hover:border-[#b91c1c] group-hover:text-white group-hover:scale-105 group-hover:shadow-md group-hover:shadow-red-900/20 transition-all duration-400 ease-out">
                   {card.icon}
                 </div>
 
-                {/* Title (2 lines) with color accent transition */}
-                <h3 className="text-base sm:text-lg font-bold text-zinc-950 leading-snug whitespace-pre-line group-hover:text-[#b91c1c] transition-colors duration-200">
+                {/* Title (2 lines) with color transition */}
+                <h3 className="text-base sm:text-lg font-bold text-zinc-950 leading-snug whitespace-pre-line group-hover:text-red-700 transition-colors duration-300">
                   {card.title}
                 </h3>
 
@@ -149,9 +152,9 @@ export const WhyChooseUs: React.FC = () => {
               </div>
 
               {/* Bottom Row: Interactive Arrow Pill Button */}
-              <div className="flex justify-end pt-5">
-                <div className="w-8 h-8 rounded-full bg-zinc-50 border border-zinc-200/80 group-hover:bg-[#b91c1c] group-hover:border-[#b91c1c] text-zinc-400 group-hover:text-white flex items-center justify-center transition-all duration-300 group-hover:translate-x-1 group-hover:scale-105 shadow-sm">
-                  <ArrowRight className="w-4 h-4 transition-transform" />
+              <div className="relative z-10 flex justify-end pt-5">
+                <div className="w-8 h-8 rounded-full bg-zinc-50 border border-zinc-200/80 group-hover:bg-[#b91c1c] group-hover:border-[#b91c1c] text-zinc-400 group-hover:text-white flex items-center justify-center transition-all duration-400 ease-out group-hover:translate-x-1 group-hover:scale-105 shadow-sm">
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                 </div>
               </div>
             </div>
